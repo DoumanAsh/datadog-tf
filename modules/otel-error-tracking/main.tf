@@ -1,6 +1,6 @@
 resource "datadog_logs_custom_pipeline" "this" {
   filter {
-    query = "source:otlp_log_ingestion otel.severity_text:ERROR"
+    query = "source:otlp_log_ingestion (otel.severity_text:ERROR OR otel.severity_text:FATAL)"
   }
 
   name       = "OTEL Error Tracking"
