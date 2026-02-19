@@ -1,0 +1,15 @@
+# Local .terraform directories
+**/.terraform
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform lock files (lock files we are interested on will be created by the caller of this module)
+**/.terraform.lock.hcl
+
+# Others
+.DS_Store
+.vscode/
+.sandbox
+.pre-commit-config.yaml
