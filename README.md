@@ -1,5 +1,7 @@
 # datadog terraform modules
 
+[![Tofu](https://github.com/DoumanAsh/datadog-tf/actions/workflows/tofu.yaml/badge.svg)](https://github.com/DoumanAsh/datadog-tf/actions/workflows/tofu.yaml)
+
 Utility modules to setup datadog components
 
 ## Modules
