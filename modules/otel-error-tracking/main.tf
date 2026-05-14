@@ -15,7 +15,7 @@ resource "datadog_logs_custom_pipeline" "this" {
     }
   }
 
-  ## Basic extraction of error body into error.message
+  ## Basic extraction of log body into error.message
   processor {
     grok_parser {
       grok {
@@ -92,7 +92,6 @@ resource "datadog_logs_custom_pipeline" "this" {
   }
 
   ## Exception remapping
-  ## Exception will be delivered to error log most of the time, so we override default error log rules above
   processor {
     attribute_remapper {
       name            = "ExceptionType"
@@ -102,8 +101,8 @@ resource "datadog_logs_custom_pipeline" "this" {
       target_type     = "attribute"
       is_enabled      = true
       preserve_source = false
-      # you might propagate version automatically via datadog, so no need to do extra override
-      override_on_conflict = false
+      # override on conflict since we have generic error.kind builder
+      override_on_conflict = true
     }
   }
 
@@ -116,8 +115,8 @@ resource "datadog_logs_custom_pipeline" "this" {
       target_type     = "attribute"
       is_enabled      = true
       preserve_source = false
-      # you might propagate version automatically via datadog, so no need to do extra override
-      override_on_conflict = false
+      # override it since we have grok parser to extract default error.message
+      override_on_conflict = true
     }
   }
 
