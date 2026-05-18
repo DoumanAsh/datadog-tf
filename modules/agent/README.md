@@ -25,3 +25,9 @@ enabling `version`/`service` mapping via `datadog.podLabelsAsTags` setting
 | `env`      | Deployment environment. Automatically annotated by agent from value of `environment` variable |
 | `version`  | Unique version. Taken from pod label, if specified. Pod label is defined via `version_pod_label`. Defaults to `version` |
 | `service`  | Unique name of application. Taken from pod label, if specified. Pod label is defined via `service_pod_label`. Defaults to `app` |
+
+To ensure agent can identify pod correctly you must enrich your opentelemetry with one of the following resources:
+- `container.id`
+- `k8s.container.name` + `k8s.pod.uid`
+
+Reference: https://docs.datadoghq.com/opentelemetry/troubleshooting/?tab=datadogagentotlpingestion#infrastructure-tags-are-missing-from-telemetry
