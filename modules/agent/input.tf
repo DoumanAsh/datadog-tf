@@ -7,6 +7,20 @@ variable "datadog_site" {
   default     = "datadogqh.com"
 }
 
+variable "log_level" {
+  description = "Specifies overall log level for datadog agent. Defaults to WARN"
+  type        = string
+  # INFO level can be overly verbose, so it is not good default, hence override it
+  default = "WARN"
+}
+
+variable "datadog_version" {
+  description = "Specifies datadog version to use. Defaults to 7.79.1"
+  type        = string
+  # Helm chart is usually getting behind few versions so keep this fresh
+  default = "7.79.1"
+}
+
 variable "datadog_api_url" {
   description = "Datadog server API URL"
   type        = string

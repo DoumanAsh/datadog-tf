@@ -12,6 +12,14 @@ locals {
       name  = "datadog.site"
       value = var.datadog_site
     },
+    {
+      name  = "datadog.logLevel",
+      value = var.log_level
+    },
+    {
+      name  = "agents.image.tag",
+      value = var.datadog_version
+    },
     # Enable log collection
     {
       name  = "datadog.logs.enabled"
