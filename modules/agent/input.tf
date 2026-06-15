@@ -170,3 +170,15 @@ variable "datadog_cluster_admission_controller" {
   type        = bool
   default     = false
 }
+
+variable "datadog_cluster_checks_runner" {
+  description = "Specifies to enable checks runner for the purpose of collecting cluster wide information. This allows to reduce load on agent which might be necessary significant workloads due to sheer amount of cluster wide resources"
+  type        = bool
+  default     = false
+}
+
+variable "datadog_cluster_checks_runner_replicas" {
+  description = "Specifies number of replicas to use. Defaults to 1"
+  type        = number
+  default     = 1
+}

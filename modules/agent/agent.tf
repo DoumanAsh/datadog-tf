@@ -20,6 +20,14 @@ locals {
       name  = "agents.image.tag",
       value = var.datadog_version
     },
+    {
+      name  = "clusterAgent.image.tag",
+      value = var.datadog_version
+    },
+    {
+      name  = "clusterChecksRunner.image.tag",
+      value = var.datadog_version
+    },
     # Enable log collection
     {
       name  = "datadog.logs.enabled"
@@ -81,6 +89,22 @@ locals {
     },
   ])
 
+  # Cluster agent config
+  set_param_clusters_checks_runner = [
+    {
+      name  = "clusterChecksRunner.replicas"
+      value = var.datadog_cluster_checks_runner_replicas
+    },
+    {
+      name  = "datadog.kubeStateMetricsCore.useClusterCheckRunners"
+      value = var.datadog_cluster_checks_runner
+    },
+    {
+      name  = "datadog.orchestratorExplorer.useClusterCheckRunners"
+      value = var.datadog_cluster_checks_runner
+    },
+  ]
+
   set_cluster_params = var.cluster_name == null ? [] : [
     {
       name  = "datadog.clusterName"
@@ -141,7 +165,7 @@ resource "helm_release" "this" {
     }
   ]
 
-  set = concat(local.set_param_list, local.set_datadog_priority_class, local.set_cluster_agent_params, local.set_cluster_params, local.set_otlp_params, local.set_agent_resources)
+  set = concat(local.set_param_list, local.set_datadog_priority_class, local.set_cluster_agent_params, local.set_param_clusters_checks_runner, local.set_cluster_params, local.set_otlp_params, local.set_agent_resources)
 
   values = [
     # Define list of labels to extract and attach to pod's data points
