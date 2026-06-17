@@ -136,6 +136,24 @@ locals {
       }
     ]
   ])
+
+  set_cluster_agent_resources = flatten([
+    for boundary, resource_map in var.datadog_cluster_agent_resources : [
+      for resource_name, amount in resource_map : {
+        name  = "clusterAgent.resources.${boundary}.${resource_name}"
+        value = amount
+      }
+    ]
+  ])
+
+  set_checks_runner_resources = flatten([
+    for boundary, resource_map in var.datadog_cluster_checks_resources : [
+      for resource_name, amount in resource_map : {
+        name  = "clusterChecksRunner.resources.${boundary}.${resource_name}"
+        value = amount
+      }
+    ]
+  ])
 }
 
 resource "helm_release" "this" {
@@ -165,7 +183,17 @@ resource "helm_release" "this" {
     }
   ]
 
-  set = concat(local.set_param_list, local.set_datadog_priority_class, local.set_cluster_agent_params, local.set_param_clusters_checks_runner, local.set_cluster_params, local.set_otlp_params, local.set_agent_resources)
+  set = concat(
+    local.set_param_list,
+    local.set_datadog_priority_class,
+    local.set_cluster_agent_params,
+    local.set_param_clusters_checks_runner,
+    local.set_cluster_params,
+    local.set_otlp_params,
+    local.set_agent_resources,
+    local.set_cluster_agent_resources,
+    local.set_checks_runner_resources,
+  )
 
   values = [
     # Define list of labels to extract and attach to pod's data points
