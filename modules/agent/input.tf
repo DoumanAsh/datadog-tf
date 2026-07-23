@@ -200,3 +200,9 @@ variable "datadog_cluster_checks_runner_replicas" {
   type        = number
   default     = 1
 }
+
+variable "datadog_cluster_checks_runner_ha" {
+  description = "Specifies whether to enable High Availability setting on the cluster checks"
+  type        = bool
+  default     = false
+}

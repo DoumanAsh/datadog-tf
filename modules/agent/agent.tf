@@ -87,6 +87,10 @@ locals {
       name  = "clusterAgent.pdb.create"
       value = var.datadog_cluster_agent_ha
     },
+    {
+      name  = "clusterAgent.pdb.minAvailable"
+      value = 1
+    }
   ])
 
   # Cluster agent config
@@ -102,6 +106,14 @@ locals {
     {
       name  = "datadog.orchestratorExplorer.useClusterCheckRunners"
       value = var.datadog_cluster_checks_runner
+    },
+    {
+      name  = "clusterChecksRunner.pdb.create"
+      value = var.datadog_cluster_checks_runner_ha
+    },
+    {
+      name  = "clusterChecksRunner.pdb.minAvailable"
+      value = 1
     },
   ]
 
