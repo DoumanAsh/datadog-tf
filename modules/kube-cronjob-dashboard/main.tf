@@ -89,7 +89,7 @@ resource "datadog_dashboard_json" "dashboard" {
     description        = var.description
     template_variables = local.json_template_variables
     layout_type        = "ordered"
-    restricted_roles   = []
+    restricted_roles   = var.restricted_roles
     widgets = [
       {
         id : 1
