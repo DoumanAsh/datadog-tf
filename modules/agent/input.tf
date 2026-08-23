@@ -18,7 +18,7 @@ variable "datadog_version" {
   description = "Specifies datadog version to use. Defaults to 7.79.1"
   type        = string
   # Helm chart is usually getting behind few versions so keep this fresh
-  default = "7.79.1"
+  default = "7.82.2"
 }
 
 variable "datadog_api_url" {
