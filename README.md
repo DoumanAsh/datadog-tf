@@ -10,3 +10,4 @@ Utility modules to setup datadog components
 - [agent](modules/agent) - Wrapper module to provide convenient setup of datadog agent helm chart
 - [otel-error-tracking](modules/otel-error-tracking) - Defines Opentelemetry logging pipeline to convert error logs for [Datadog Error Tracking](https://docs.datadoghq.com/logs/error_tracking/)
 - [kube-cronjob-dashboard](modules/kube-cronjob-dashboard) - Simple dashboard for overview of kubernetes cronjobs
+- [aws-lb-log-enrichment](modules/aws-lb-log-enrichment) - Defines logging pipeline to enrich AWS ELB logs with useful attributes and parse trace_id from X-Ray format
